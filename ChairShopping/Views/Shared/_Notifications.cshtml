@@ -1,0 +1,114 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.31/sweetalert2.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.31/sweetalert2.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.31/sweetalert2.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.31/sweetalert2.min.js"></script>
+@{
+    if (TempData["ProductAdded"] != null)
+    {
+        <script type="text/javascript">
+            toastr.success('@TempData["ProductAdded"]', 'success');
+        </script>
+    }
+     if (TempData["ProductUpdated"] != null)
+    {
+        <script type="text/javascript">
+            toastr.success('@TempData["ProductUpdated"]', 'success');
+        </script>
+    }
+     if (TempData["ProductDeleted"] != null)
+    {
+        <script type="text/javascript">
+            toastr.success('@TempData["ProductDeleted"]', 'success');
+        </script>
+    }
+     if (TempData["reviewAdd"] != null)
+    {
+        <script type="text/javascript">
+            toastr.success('@TempData["reviewAdd"]', 'success');
+        </script>
+    }
+     if (TempData["contactAdded"] != null)
+    {
+        <script type="text/javascript">
+            toastr.success('@TempData["contactAdded"]', 'success');
+        </script>
+    }
+    @if (TempData["cart_added"] != null)
+    {
+        <script>
+            Swal.fire(
+                'Success ',
+                '@TempData["cart_added"]',
+                'success',
+            )
+        </script>
+    }
+    @if (TempData["ContactUsSattus"] != null)
+    {
+        <script>
+            Swal.fire(
+                'Success ',
+                '@TempData["ContactUsStatus"]',
+                'success',
+            )
+        </script>
+    }
+    @if (TempData["ContactUsStatus"] != null)
+    {
+        <script>
+            Swal.fire(
+                'Success ',
+                '@TempData["ContactUsStatus"]',
+                'success',
+            )
+        </script>
+    }
+    @if (TempData["cart_added"] != null)
+    {
+        <script>
+            Swal.fire(
+                'Success !',
+                '@TempData["cart_added"]',
+                'success',
+            )
+        </script>
+    }
+    @if (TempData["cart_notAdded"] != null)
+    {
+        <script>
+            Swal.fire(
+                'Warning !',
+                '@TempData["cart_notAdded"]',
+                'warning',
+            )
+        </script>
+    }
+    @if (TempData["cart_OrderdJustOne"] != null)
+    {
+        <script>
+            Swal.fire(
+                'Warning  !',
+                '@TempData["cart_OrderdJustOne"]',
+                'warning',
+            )
+        </script>
+    }
+    @if (TempData["cart_notUpdated"] != null)
+    {
+        <script>
+            Swal.fire(
+                'Warning !',
+                '@TempData["cart_notUpdated"]',
+                'warning',
+            )
+        </script>
+    }
+}
+

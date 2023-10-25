@@ -1,0 +1,87 @@
+﻿@using ChairShopping.Interfaces;
+@model List<Product>
+@using Microsoft.AspNetCore.Identity
+@inject IAdmin _admin;
+@inject SignInManager<ApplicationUser> _SignInManager
+@inject UserManager<ApplicationUser> _UserManager
+@{
+    var favs = await _admin.GetAllFavourits();
+}
+@if (Model.Count == 0)
+{
+    <div class="alert alert-danger" role="alert">
+        No Products Yet !
+    </div>
+}
+@foreach (var items in Model)
+{
+    <!-- Block2 -->
+    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+        <div class="block2">
+            <div class="block2-pic hov-img0">
+                <div class="block2-pic hov-img0">
+                    <img src="~/asset/images/@items.Image" alt="IMG-PRODUCT" width="200" height="300" style="border-radius:10px">
+                </div>
+            </div>
+
+            <div class="block2-txt flex-w flex-t p-t-14">
+                <div class="block2-txt-child1 flex-col-l ">
+                    <a asp-action="Index" asp-controller="ProductDetails" asp-route-id="@items.Id" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                        @items.ProductName
+                    </a>
+
+                    <span class="stext-105 cl3">
+                        @items.Price $
+                    </span>
+                </div>
+                <form asp-action="AddFavourites" asp-controller="Cart" method="post">
+                    <input type="hidden" name="ProductId" value="@items.Id" />
+                    @if (_SignInManager.IsSignedIn(User))
+                    {
+                        <input type="hidden" name="UserId" value="@_UserManager.GetUserId(User)" />
+                    }
+
+                    <div class="block2-txt-child2 flex-r p-t-3">
+                        <button type="submit" class="btn-addwish-b2 dis-block pos-relative">
+                            <img src="images/icons/icon-heart-01.png" alt="ICON">
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <form asp-action="AddToCart" asp-controller="Cart" method="post">
+                <input type="hidden" name="Price" value="@items.Price" />
+                <input type="hidden" name="ProductId" value="@items.Id" />
+                <input type="hidden" name="Discount" value="0" />
+                @if (_SignInManager.IsSignedIn(User))
+                {
+                    <input type="hidden" name="UserId" value="@_UserManager.GetUserId(User)" />
+                }
+                @if (items.NumberOfStock > 0)
+                {
+                    <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                            <i class="fs-16 zmdi zmdi-minus"></i>
+                        </div>
+                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="Quantity" value="1">
+                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                            <i class="fs-16 zmdi zmdi-plus"></i>
+                        </div>
+                    </div>
+                    <button type="submit" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+                        Add to cart
+                    </button>
+                    @if (items.NumberOfStock == 1 || items.NumberOfStock == 2)
+                    {
+                        <span class="text-danger">
+                            Only @items.NumberOfStock left in stock - order soon.
+                        </span>
+                    }
+                }
+                else
+                {
+                    <span style="color:#af5050">Out of stock , it will come soon .</span>
+                }
+            </form>
+        </div>
+    </div>
+}

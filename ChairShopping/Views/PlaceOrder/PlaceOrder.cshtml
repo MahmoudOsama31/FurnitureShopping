@@ -1,0 +1,147 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> _SignInManager;
+@inject UserManager<ApplicationUser> _UserManager;
+@model PlaceOrderViewModel;
+@{
+	Layout = "CssScripts";
+	ApplicationUser user =await _UserManager.GetUserAsync(User);
+	var email = user.Email;
+}
+<head>
+	<title>Place Order</title>
+
+</head>
+
+	<div class="untree_co-section">
+		<div class="container">
+@* 			<div asp-validation-summary="All" class="text-danger"></div>
+ *@		<form asp-action="PlaceOrder" asp-controller="PlaceOrder" method="post">
+			@if (_SignInManager.IsSignedIn(User))
+			{
+				<div class="row">
+					<div class="col-md-6 mb-5 mb-md-0">
+						<h2 class="h3 mb-3 text-black">Billing Details</h2>
+						<div class="p-3 p-lg-5 border bg-white">
+							<div class="form-group row">
+								<div class="col-md-6">
+									<label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
+									<input asp-for="FirstName" type="text" class="form-control" placeholder="First Name" value="@User.Identity.Name">
+									<span asp-validation-for="FirstName" class="text-danger"></span>
+								</div>
+								<div class="col-md-6">
+									<label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
+									<input asp-for="LastName" type="text" class="form-control" placeholder="Last Name">
+									<span asp-validation-for="LastName" class="text-danger"></span>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-md-12">
+									<label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
+									<input asp-for="Address" type="text" class="form-control" placeholder="Street address">
+									<span asp-validation-for="Address" class="text-danger"></span>
+								</div>
+							</div>
+
+							<div class="form-group row mb-5">
+								<div class="col-md-6">
+									<label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
+									<input asp-for="Email" type="text" class="form-control" placeholder="Email Address" value="@email">
+									<span asp-validation-for="Email" class="text-danger"></span>
+								</div>
+								<div class="col-md-6">
+									<label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
+									<input asp-for="Phone" type="text" class="form-control" placeholder="Phone Number">
+									<span asp-validation-for="Phone" class="text-danger"></span>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="c_order_notes" class="text-black">Order Notes</label>
+								<textarea asp-for="OrderNotes" cols="30" rows="5" class="form-control" placeholder="Write your notes here..."></textarea>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-md-6">
+						@if (ViewBag.c == true || ViewBag.c == null)
+						{
+							<div class="row mb-5">
+								<div class="col-md-12">
+									<h2 class="h3 mb-3 text-black">Coupon Code</h2>
+									<div class="p-3 p-lg-5 border bg-white">
+										<label for="c_code" class="text-black mb-3">Enter your coupon code</label>
+										<div class="input-group w-75 couponcode-wrap">
+											<input asp-for="Coupon.CouponCode" type="text" class="form-control me-2" placeholder="Coupon Code">
+											@if (ViewBag.c == true)
+											{
+												<span asp-validation-for="Coupon.CouponCode" class="text-danger"></span>
+											}
+											@if (ViewBag.c == null)
+											{
+												<span class="text-danger">Invalid Coupon</span>
+											}
+										</div>
+									</div>
+								</div>
+							</div>
+						}
+						@if (ViewBag.c == false)
+						{
+								<div class="alert alert-danger alert-dismissible fade show" role="alert">
+									<strong>No Coupon Today!!!!!</strong>
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+						}
+						<div class="row mb-5">
+							<div class="col-md-12">
+								<h2 class="h3 mb-3 text-black">Your Order</h2>
+								<div class="p-3 p-lg-5 border bg-white">
+									<table class="table site-block-order-table mb-5">
+										<thead>
+										<th>Product</th>
+										<th>Total</th>
+										</thead>
+										<tbody>
+											@if (ViewBag.order !=null)
+											{
+												@foreach (var item in ViewBag.order)
+												{
+													<tr>
+														<td>@item.Product.ProductName <strong class="mx-2">x</strong>@item.Quantity</td>
+														<td>$@item.TotalPrice</td>
+													</tr>
+												}
+											}
+											<tr>
+												<td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+												<td class="text-black font-weight-bold"><strong>$@ViewBag.totalOrder</strong></td>
+											</tr>
+										</tbody>
+									</table>
+
+									<div class="form-group">
+										<button type="submit" class="btn btn-success btn-lg py-3 btn-block">Place Order</button>
+									</div>
+									@if (_SignInManager.IsSignedIn(User))
+									{
+										<div class="form-group">
+											<a asp-action="GetCartById" asp-controller="Cart" asp-route-Id="@_UserManager.GetUserId(User)" class="btn btn-primary btn-lg py-3 btn-block">Back</a>
+										</div>
+									}
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			}
+			</form>
+			<!-- </form> -->
+		</div>
+	</div>
+
+

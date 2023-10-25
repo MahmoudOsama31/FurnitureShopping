@@ -1,0 +1,69 @@
+﻿@model OrderViewModel
+@{
+    Layout = null;
+}
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/favicon.png" type="">
+    <title>Famms - Fashion HTML Template</title>
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" />
+    <!-- font awesome style -->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
+</head>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form class="m-3" asp-action="AddOrder" asp-controller="dashboard" method="post">
+    <div class="form-group">
+        <label for="UserId">User Name:</label>
+        <select id="UserId" name="UserId" class="form-control">
+            <option value="">-- Select User --</option>
+            @foreach (var user in Model.userList)
+            {
+                <option value="@user.Value">@user.Text</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="ProductId">Product Name:</label>
+        <select id="ProductId" name="ProductId" class="form-control">
+            <option value="">-- Select Product --</option>
+            @foreach (var Product in Model.productList)
+            {
+                <option value="@Product.Value">@Product.Text</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Quantity of this Product</label>
+        <input type="text" class="form-control" asp-for="Quantity" placeholder="Enter Quantity">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Price of this Product</label>
+        <input type="text" class="form-control" asp-for="Price" placeholder="Enter Price">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Discount??</label>
+        <input type="text" class="form-control" asp-for="Discount" placeholder="Enter Discount">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a class="btn btn-success" asp-controller="dashboard" asp-action="GetAllOrders">Back</a>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <!-- popper js -->
+    <script src="~/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- custom js -->
+    <script src="~/js/custom.js"></script>
+</form>

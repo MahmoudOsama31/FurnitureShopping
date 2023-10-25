@@ -1,0 +1,19 @@
+﻿@using ChairShopping.Data;
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-action="Logout" asp-controller="Account" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <button class="dropdown-item" style="color:cornflowerblue; border:0px;background-color:transparent" type="submit">Logout</button>
+    </form>
+
+}
+else
+{
+    <a class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" id="login" asp-action="Login" asp-controller="Account" class="flex-c-m trans-04 p-lr-25">
+        Login
+        <i class="zmdi zmdi-favorite-outline"></i>
+    </a>
+}

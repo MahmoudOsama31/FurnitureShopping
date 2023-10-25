@@ -1,0 +1,45 @@
+﻿@model Product
+@{
+    Layout = null;
+}
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~favicon.png" type="">
+    <title>Famms - Fashion HTML Template</title>
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" />
+    <!-- font awesome style -->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
+</head>
+
+<h1>Delete Product</h1>
+
+<p>Are you sure you want to delete the Product for <strong>@ViewBag.Updateprd.ProductName</strong>?</p>
+
+@using (Html.BeginForm())
+{
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="GetAllProducts" asp-controller="Dashboard" class="btn btn-secondary">Cancel</a>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <!-- popper js -->
+    <script src="~/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- custom js -->
+    <script src="~/js/custom.js"></script>
+}

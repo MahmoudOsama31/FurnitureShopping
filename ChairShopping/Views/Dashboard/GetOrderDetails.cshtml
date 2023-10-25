@@ -1,0 +1,63 @@
+﻿@model Order
+@{
+    Layout = null;
+}
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/favicon.png" type="">
+    <title>Famms - Fashion HTML Template</title>
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" />
+    <!-- font awesome style -->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
+</head>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form class="m-3" asp-action="GetOrderDetails" asp-controller="dashboard" method="get">
+    <div class="form-group">
+        <label for="UserId">User Name:</label>
+        <select id="UserId" name="UserId" class="form-control" disabled>
+            <option value="@ViewBag.orderDetail.User.Id">--@ViewBag.orderDetail.User.UserName--</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="ProductId">Product Name:</label>
+        <select id="ProductId" name="ProductId" class="form-control" disabled>
+            <option value="@ViewBag.orderDetail.Product.Id">-- @ViewBag.orderDetail.Product.ProductName --</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Quantity of this Product</label>
+        <input type="text" class="form-control" asp-for="Quantity" value="@ViewBag.orderDetail.Quantity" disabled>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Price of this Product</label>
+        <input type="text" class="form-control" asp-for="Price" value="@ViewBag.orderDetail.Price" disabled>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Discount??</label>
+        <input type="text" class="form-control" asp-for="Discount" value="@ViewBag.orderDetail.Discount" disabled>
+    </div>
+    <a class="btn btn-primary" asp-controller="dashboard" asp-action="EditOrder" asp-route-id="@ViewBag.orderDetail.Id">Edit Order</a>
+    <a class="btn btn-success" asp-controller="dashboard" asp-action="GetAllOrders">Back</a>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <!-- popper js -->
+    <script src="~/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- custom js -->
+    <script src="~/js/custom.js"></script>
+</form>
+
+

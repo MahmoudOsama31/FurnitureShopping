@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model OrderViewModel
+@inject UserManager<ApplicationUser> _UserManager
+@{
+    Layout = "CssScripts";
+}
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<form class="m-3" asp-action="UpdateCart" asp-controller="Cart" method="post">
+    <div class="form-group">
+        <label for="UserId">User Name:</label>
+        <select id="UserId" name="UserId" class="form-control"readonly>
+            <option value="@ViewBag.Updateorder.User.Id">--@ViewBag.Updateorder.User.UserName--</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="ProductId">Product Name:</label>
+        <select id="ProductId" name="ProductId" class="form-control" readonly>
+            <option value="@ViewBag.Updateorder.Product.Id">-- @ViewBag.Updateorder.Product.ProductName --</option>
+        </select>
+    </div>
+@*     <div class="wrap-num-product flex-w">
+        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+            <i class="fs-16 zmdi zmdi-minus"></i>
+        </div>
+
+        <input asp-for="Quantity" value="@ViewBag.Updateorder.Quantity" class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1">
+
+        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+            <i class="fs-16 zmdi zmdi-plus"></i>
+        </div>
+    </div> *@
+    <div class="form-group">
+        <label for="exampleInputEmail1">Quantity of this Product</label>
+        <input type="text" class="form-control" asp-for="Quantity" value="@ViewBag.Updateorder.Quantity" placeholder="Enter Quantity">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Price of this Product</label>
+        <input type="text" class="form-control" asp-for="Price" value="@ViewBag.Updateorder.Price" placeholder="Enter Price" readonly>
+    </div>
+    <div class="form-group">
+        <input type="hidden" class="form-control" asp-for="Discount" value="@ViewBag.Updateorder.Discount" placeholder="Enter Discount" readonly>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a class="btn btn-success" asp-controller="Cart" asp-action="GetCartById" asp-route-Id="@_UserManager.GetUserId(User)">Back</a>
+</form>
+
+
+
+
+

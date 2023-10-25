@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+}
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/favicon.png" type="">
+    <title>Famms - Fashion HTML Template</title>
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" />
+    <!-- font awesome style -->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
+</head>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Users</h1> <br />
+                <a class="btn btn-success" asp-controller="dashboard" asp-action="AddUser">Create New user</a>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">User</a></li>
+                    <li class="breadcrumb-item active">User Card</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<section class="content">
+    <div class="container-fluid">
+
+        <table class="table table-hover table-striped table-bordered text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody class="font-weight-bold">
+                @foreach (var item in ViewBag.AllUsers)
+                {
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td>@item.Email</td>
+                        <td><a asp-controller="dashboard" asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-primary">Update</a></td>
+                        <td><a asp-controller="dashboard" asp-action="DeleteUser" asp-route-id="@item.Id" class="btn btn-danger">Delete</a></td>
+                        <td><a asp-controller="dashboard" asp-action="GetUserDetails" asp-route-id="@item.Id" class="btn btn-success">Details</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a class="btn btn-success" asp-controller="dashboard" asp-action="index">Back</a>
+
+        <br />
+        Products count : @ViewBag.AllUsers.Count
+    </div>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <!-- popper js -->
+    <script src="~/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- custom js -->
+    <script src="~/js/custom.js"></script>
+</section>
+

@@ -1,0 +1,55 @@
+﻿@model RegisterVM
+@{
+    Layout = null;
+}
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/favicon.png" type="">
+    <title>Famms - Fashion HTML Template</title>
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" />
+    <!-- font awesome style -->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
+</head>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form class="m-3" asp-action="EditUser" asp-controller="dashboard" method="post">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" asp-for="Email" value="@ViewBag.UpdateUser.Email" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">User Name</label>
+        <input type="text" class="form-control" asp-for="UserName" value="@ViewBag.UpdateUser.UserName" placeholder="Enter UserName">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" asp-for="Password" value="@ViewBag.UpdateUser.PasswordHash" class="form-control" placeholder="Password">
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" asp-for="IsAgree" value="@ViewBag.UpdateUser.IsAgree" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" asp-for="IsAgree" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a class="btn btn-success" asp-controller="dashboard" asp-action="GetAllUsers">Back</a>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <!-- popper js -->
+    <script src="~/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- custom js -->
+    <script src="~/js/custom.js"></script>
+</form>
+

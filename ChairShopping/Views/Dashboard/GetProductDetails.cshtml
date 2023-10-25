@@ -1,0 +1,66 @@
+﻿@model Product
+@{
+    Layout = null;
+}
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/favicon.png" type="">
+    <title>Famms - Fashion HTML Template</title>
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" />
+    <!-- font awesome style -->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
+</head>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form class="m-3" asp-action="GetProductDetails" asp-controller="dashboard" method="get">
+    <div class="form-group">
+        <label for="CategoryId">Category Name:</label>
+        <select id="CategoryId" name="CategoryId" class="form-control" disabled>
+            <option value="@ViewBag.Updateprd.Category.Id">@ViewBag.Updateprd.Category.CategoryName</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Product Name</label>
+        <input type="text" class="form-control" asp-for="ProductName" value="@ViewBag.Updateprd.ProductName" disabled>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Product Description</label>
+        <input type="text" class="form-control" asp-for="ProductDescription" value="@ViewBag.Updateprd.ProductDescription" disabled>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Product Color</label>
+        <input type="text" class="form-control" asp-for="Color" value="@ViewBag.Updateprd.Color" disabled>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Product Price</label>
+        <input type="text" class="form-control" asp-for="Price" value="@ViewBag.Updateprd.Price" disabled>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Images</label>
+        @*         i need script to remove the old image and put the new image in website
+        *@        <img src="~/asset/images/@ViewBag.Updateprd.Image" width="200px" height="auto" />
+    </div>
+    <a class="btn btn-primary" asp-controller="dashboard" asp-action="EditProduct" asp-route-id="@ViewBag.Updateprd.Id">Edit Category</a>
+    <a class="btn btn-success" asp-controller="dashboard" asp-action="GetAllCategories">Back</a>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <!-- popper js -->
+    <script src="~/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- custom js -->
+    <script src="~/js/custom.js"></script>
+</form>
+
+

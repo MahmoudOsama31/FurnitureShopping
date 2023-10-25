@@ -1,0 +1,108 @@
+﻿@model CategoriesViewModel;
+@{
+    Layout = "CssScripts";
+}
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/favicon.png" type="">
+    <title>Famms - Fashion HTML Template</title>
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" />
+    <!-- font awesome style -->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
+</head>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Categories</h1> <br />
+                <a class="btn btn-success" asp-controller="dashboard" asp-action="AddCategory">Create New Category</a>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Category</a></li>
+                    <li class="breadcrumb-item active">Category Card</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<section class="content">
+    <div class="container-fluid">
+        <form asp-action="GetAllCategories" asp-controller="dashboard" method="post">
+            <table cellpadding="0" cellspacing="0" class="table table-hover table-striped table-bordered text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Category Id</th>
+                    <th>Category Name</th>
+                </tr>
+            </thead>
+            <tbody class="font-weight-bold">
+                @foreach (var item in Model.categories)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.CategoryName</td>
+                        <td><a asp-controller="dashboard" asp-action="EditCategory" asp-route-id="@item.Id" class="btn btn-primary">Update</a></td>
+                        <td><a asp-controller="dashboard" asp-action="DeleteCategory" asp-route-id="@item.Id" class="btn btn-danger">Delete</a></td>
+                        <td><a asp-controller="dashboard" asp-action="GetCategoryDetails" asp-route-id="@item.Id" class="btn btn-success">Details</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+            <table cellpadding="0" cellspacing="0" aria-label="Page navigation example">
+                <tr class="pagination">
+                    @for (int i = 1; i <= Model.PageCount; i++)
+                    {
+                       @*  style = "color:black;float:left;padding:8px 16px;text-decoration:none;transition:background-color .3s;" *@
+                        <td class="page-item">
+                            @if (i != Model.CurrentPageIndex)
+                            {
+                                <a class="page-link" href="javascript:PagerClick(@i);">@i</a>
+                            }
+                            else
+                            {
+                                <span>@i</span>
+                            }
+                        </td>
+                    }
+                </tr>
+            </table>
+            <input type="hidden" id="hfCurrentPageIndex" name="currentPageIndex" />
+        </form>
+        <a class="btn btn-success" asp-controller="dashboard" asp-action="index">Back</a>
+
+        <br />
+        Products count : @ViewBag.AllCategories.Count
+    </div>
+    <script type="text/javascript">
+        function PagerClick(index) {
+            document.getElementById("hfCurrentPageIndex").value = index;
+            document.forms[0].submit();
+        }
+    </script>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <!-- popper js -->
+    <script src="~/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- custom js -->
+    <script src="~/js/custom.js"></script>
+</section>
